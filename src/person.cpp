@@ -28,11 +28,36 @@ void Person::setInterface(BikingInterface* _binkingInterface) {
 
 void Person::run() {
     // TODO: implement this method
+
+    log(QString("Person %1 started").arg(id));
+    currentSite = homeSite;
+
+    while(true){
+        Bike* bike = takeBikeFromSite(currentSite);
+        if(!bike){
+            log("Simulation ending, person stops.");
+            break;
+        }
+
+        unsigned int destSite = chooseOtherSite(currentSite);
+        bikeTo(destSite, bike);
+
+        depositBikeAtSite(destSite, bike);
+
+        unsigned int walkSite = chooseOtherSite(destSite);
+        walkTo(walkSite);
+    }
+
+    log("Person thread exiting");
 }
 
 Bike* Person::takeBikeFromSite(unsigned int _site) {
-    Bike * bike = nullptr; // just to silence compiler warnings
+    Bike * bike = stations[_site]->getBike(preferredType); // just to silence compiler warnings
     // TODO: implement this method
+
+    if(!bike){
+        return nullptr;
+    }
 
     if (binkingInterface) {
         binkingInterface->setBikes(_site, stations[_site]->nbBikes());
@@ -43,6 +68,10 @@ Bike* Person::takeBikeFromSite(unsigned int _site) {
 
 void Person::depositBikeAtSite(unsigned int _site, Bike* _bike) {
     // TODO: implement this method
+
+    if(!_bike) return;
+
+    stations[_site]->putBike((_bike));
 
     if (binkingInterface) {
         binkingInterface->setBikes(_site, stations[_site]->nbBikes());

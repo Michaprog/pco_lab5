@@ -5,6 +5,7 @@
 #include <deque>
 #include <array>
 #include "bike.h"
+#include <pcosynchro/pcothread.h>
 
 /**
  * @brief Thread-safe bike station storing bikes by type with a limited capacity.
@@ -114,6 +115,14 @@ private:
      * @brief Maximum number of bikes that can be stored in this station.
      */
     const size_t capacity;
+
+    mutable PcoMutex mutex;
+    PcoConditionVariable notFull;
+    std::array<PcoConditionVariable, Bike::nbBikeTypes> notEmptyByType;
+
+    std::array<std::deque<Bike*>, Bike::nbBikeTypes> queues;
+    size_t currentCount {0};
+    bool shouldEnd {false};
 };
 
 #endif // BIKESTATION_H
