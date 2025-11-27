@@ -5,7 +5,8 @@
 #include <deque>
 #include <array>
 #include "bike.h"
-#include <pcosynchro/pcothread.h>
+#include <pcosynchro/pcomutex.h>
+#include <pcosynchro/pcoconditionvariable.h>
 
 /**
  * @brief Thread-safe bike station storing bikes by type with a limited capacity.

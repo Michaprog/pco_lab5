@@ -28,8 +28,8 @@ void BikeStation::putBike(Bike* _bike){
     queues[t].push_back(_bike);
     ++currentCount;
 
-    notEmptyByType[t].notify_one(); // reveiller un attendant
-    mutex.unlock;
+    notEmptyByType[t].notifyOne(); // reveiller un attendant
+    mutex.unlock();
 }
 
 Bike* BikeStation::getBike(size_t _bikeType) {
@@ -51,7 +51,7 @@ Bike* BikeStation::getBike(size_t _bikeType) {
     queues[_bikeType].pop_back();
     --currentCount;
 
-    notFull.notify_one();
+    notFull.notifyOne();
     mutex.unlock();
     return b;
 }
@@ -74,7 +74,7 @@ std::vector<Bike*> BikeStation::addBikes(std::vector<Bike*> _bikesToAdd) {
 
         queues[t].push_back(b);
         ++currentCount;
-        notEmptyByType[t].notify_one();
+        notEmptyByType[t].notifyOne();
     }
     mutex.unlock();
 
@@ -100,7 +100,7 @@ std::vector<Bike*> BikeStation::getBikes(size_t _nbBikes) {
         notFull.notifyAll();
     }
 
-    mutex.unlocK();
+    mutex.unlock();
     return result;
 }
 
