@@ -1,0 +1,36 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/velo.png</file>
+        <file>images/camionette.png</file>
+        <file>images/32x32/p0.png</file>
+        <file>images/32x32/p1.png</file>
+        <file>images/32x32/p2.png</file>
+        <file>images/32x32/p3.png</file>
+        <file>images/32x32/p4.png</file>
+        <file>images/32x32/p5.png</file>
+        <file>images/32x32/p6.png</file>
+        <file>images/32x32/p7.png</file>
+        <file>images/32x32/p8.png</file>
+        <file>images/32x32/p9.png</file>
+        <file>images/32x32/p10.png</file>
+        <file>images/32x32/p11.png</file>
+        <file>images/32x32/p12.png</file>
+        <file>images/32x32/p13.png</file>
+        <file>images/32x32/p14.png</file>
+        <file>images/32x32/p15.png</file>
+        <file>images/32x32/p16.png</file>
+        <file>images/32x32/p17.png</file>
+        <file>images/32x32/p18.png</file>
+        <file>images/32x32/p19.png</file>
+        <file>images/32x32/p20.png</file>
+        <file>images/32x32/p21.png</file>
+        <file>images/32x32/p22.png</file>
+        <file>images/32x32/p23.png</file>
+        <file>images/32x32/p24.png</file>
+        <file>images/32x32/p25.png</file>
+        <file>images/32x32/p26.png</file>
+        <file>images/32x32/p27.png</file>
+        <file>images/32x32/p28.png</file>
+        <file>images/32x32/p29.png</file>
+    </qresource>
+</RCC>
