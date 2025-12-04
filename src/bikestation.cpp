@@ -21,9 +21,6 @@ void BikeStation::putBike(Bike* _bike){
     }
 
     size_t t = _bike->bikeType;
-    if (t >= Bike::nbBikeTypes){
-        t = 0;
-    }
 
     queues[t].push_back(_bike);
     ++currentCount;
@@ -48,7 +45,7 @@ Bike* BikeStation::getBike(size_t _bikeType) {
     }
 
     Bike* b = queues[_bikeType].front();
-    queues[_bikeType].pop_back();
+    queues[_bikeType].pop_front();
     --currentCount;
 
     notFull.notifyOne();
@@ -70,7 +67,6 @@ std::vector<Bike*> BikeStation::addBikes(std::vector<Bike*> _bikesToAdd) {
         }
 
         size_t t = b->bikeType;
-        if (t >= Bike::nbBikeTypes) t = 0;
 
         queues[t].push_back(b);
         ++currentCount;
@@ -89,11 +85,13 @@ std::vector<Bike*> BikeStation::getBikes(size_t _nbBikes) {
     size_t remaining = _nbBikes;
 
     for (size_t t = 0; t < Bike::nbBikeTypes && remaining > 0; ++t){
-        Bike* b = queues[t].front();
-        queues[t].pop_front();
-        result.push_back(b);
-        --currentCount;
-        --remaining;
+        while (remaining > 0 && !queues[t].empty()) {
+            Bike* b = queues[t].front();
+            queues[t].pop_front();
+            result.push_back(b);
+            --currentCount;
+            --remaining;
+        }
     }
 
     if(!result.empty()){
